@@ -1,0 +1,5 @@
+.home__section {
+  background-color: orangered;
+  display: flex;
+  padding: 30px;
+}
