@@ -1,24 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchIcon from "@material-ui/icons/Search"
 import './Header.css'
 import LanguageIcon from "@material-ui/icons/Language"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { Avatar } from "@material-ui/core"
 import { Link } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 
-function Header() {
+const FEATURED_API =
+  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+
+const SEARCH_API =
+  "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+
+function Header( {setMovies, setPrevSearchTerm} ) {
+  
+  const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const getMovies = (API) => {
+    fetch(API)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.results);
+      });
+  };
+
+  useEffect(() => {
+    getMovies(FEATURED_API);
+  }, []);
+    
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    if (searchTerm) {
+      getMovies(SEARCH_API + searchTerm);
+      setPrevSearchTerm(searchTerm)
+      setSearchTerm("");
+    } else {
+      getMovies(FEATURED_API);
+      setPrevSearchTerm(searchTerm);
+      setSearchTerm("");
+    }
+    
+      history.push('/search')
+
+    
+  };
+
+  const handleOnChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  
   return (
     <div className='header'>
-      <Link to='/'>
-        <img
+      <Link to='/' style={{textDecoration: "none"}}>
+        <h1
           className='header__icon'
-          src='https://lh3.googleusercontent.com/LS5EgtlXIpuej-bm7Nfn0iiHxiT_2ggFVRPoxEDxgdmzhL-k8XNtik3Mtg0bmuKjXIG1kTLutk3fdou_5PvTr0fp_t-5u9G9j1dx2seFtXS6kJkYgeTE-3Lj_X5SVvWTnDi3vYlJInMf85fSRXMelnXB_HrfUey1OpWY4ez9EG2OGd1CGFE-bHSDDwj1swDvTegJJhzOpS4nsgmFyoaYqvHo9rrv4tq-ZK35-ZZoN0-607KWQCfoWqn4uTe53mzg1FqAZNl-cX1Jt7KjIe2ucC5tHaac05IZg6LC6eQo59bVdehr-_vBnhGa_5GuqpCrHPN8BArk7ygiVAA7aEo-QT7-cOa0XQVl5fUWsK3Z1iv4ngvi2gsVkfgg-s8S9VjBEdR_Fc4t4Om1I7rIdRXigAYymMryxL-tGubCql0qFzLb_AQB0MfavJ-jW6bhX73mCCqvdyO3rj234eYmUi7Ka-rr-s9MSdTh35-re8j5nAdW9uZZq90J6S_MWNBPCzE0zq4PXKRymOTthdozAU7VI2udB-Zfc8lpvtMqME8X2GF5BCKPNzbHjcqeSjm7llf9GkYBOu3FF7CofaqTyWx_81CUndiXI-fSdNnKQtoXrE4lhg0fSX4s_G7s1zPo3SQ0ZUcMcMBvitoxQir8r8j4A-75T8y6QY_KZ4OZND8N9F5PNUibrjtiF50N-K2B=w1050-h600-no?authuser=0'
-          alt=''
-        />
+        ><br/>Neckflips</h1>
       </Link>
       <div className='header__center'>
-        <input type='text' style={{ backgroundColor: "transparent" }} />
-        <SearchIcon />
+        <form onSubmit={handleOnSubmit}>
+          <input type='text' style={{ backgroundColor: "transparent", color: "red", border:"none", fontSize: "20px"}} value={searchTerm} onChange={handleOnChange}/>
+        </form>
+        <SearchIcon style={{cursor: "pointer"}} onClick={handleOnSubmit}/>
       </div>
 
       <div className='header__right'>

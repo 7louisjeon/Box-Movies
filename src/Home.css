@@ -1,5 +1,7 @@
 .home__section {
-  background-color: orangered;
+  background-color: var(--clr-main1);
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 30px;
 }

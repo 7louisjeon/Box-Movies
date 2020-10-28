@@ -1,3 +1,8 @@
+.searchPage {
+  color: var(--clr-main2);
+  background-color: black;
+}
+
 .searchPage__info {
   padding: 20px;
 }
@@ -11,8 +16,16 @@
   margin-bottom: 30px;
 }
 
-.searchPage__info > button {
+.searchPage__info > button,
+.filter > button,
+.filter {
+  border: 1px solid var(--clr-main2);
+  color: var(--clr-main2);
   border-radius: 30px;
   text-transform: inherit;
   margin: 5px;
+}
+
+.filter {
+  width: fit-content;
 }

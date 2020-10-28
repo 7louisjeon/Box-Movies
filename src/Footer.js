@@ -4,7 +4,7 @@ import './Footer.css'
 function Footer() {
   return (
     <div className='footer'>
-      <p>© 2020 Nightleaf, Inc. All rights reserved</p>
+      <p>© 2020 Neckflips, Inc. All rights reserved</p>
       <p>Privacy · Terms · Sitemap · Company Details</p>
     </div>
   );

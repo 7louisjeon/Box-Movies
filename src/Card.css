@@ -1,6 +1,6 @@
 .card {
-  background-color: wheat;
-  color: orangered;
+  background-color: var(--clr-main2);
+  color: var(--clr-main1);
   margin: 10px;
   border: 0px solid black;
   border-radius: 10px;
@@ -8,18 +8,20 @@
   box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
   transition: transform 100ms ease-in;
   cursor: pointer;
+  width: 30vw;
+  height: 600px;
 }
 
 .card:hover {
-  color: wheat;
-  background-color: olive;
+  color: var(--clr-main2);
+  background: none;
   transform: scale(1.07);
+  border: 2px solid red;
 }
 
 .card > img {
-  object-fit: fill;
-  min-width: 300px;
-  min-height: 50%;
+  object-fit: cover;
+  max-height: 50%;
   width: 100%;
 }
 
@@ -29,6 +31,16 @@
   padding: 20px;
   padding-top: 20px;
   border: 1;
+}
+
+.info__top {
+  height: 210px;
+  overflow: hidden;
+}
+
+.info__bottom {
+  position: absolute;
+  display: flex;
 }
 
 /* .card__info > h2 {

@@ -1,37 +1,41 @@
-import { Button } from '@material-ui/core'
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
-import './Banner.css'
-import Search from './Search'
+import { Button } from "@material-ui/core";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import "./Banner.css";
 
-function Banner() {
+function Banner({ setPrevSearchTerm }) {
   const history = useHistory();
-  const [showSearch, setShowSearch] = useState(false);
+
+  const handleOnClick = () => {
+    setPrevSearchTerm("Box Office Top Movies");
+    history.push("/search");
+  };
 
   return (
-    <div className='banner'>
-      <div className='banner__search'>
-        {showSearch && <Search />}
+    <div className="banner">
+      <div className="banner__search">
         <Button
-          onClick={() => setShowSearch(!showSearch)}
-          className='banner__searchButton'
-          variant='outlined'
+          onClick={handleOnClick}
+          className="banner__searchButton"
+          variant="outlined"
         >
-          {showSearch ? "Hide" : "Search Dates"}
+          "Search Movies"
         </Button>
       </div>
-      <div className='banner__info'>
-        <div className='banner__info__texts'>
-          <h1>Want to camp this weekend?</h1>
+      <div className="banner__info">
+        <div className="banner__info__texts">
+          <h1>Best Movie Site Ever Existed?</h1>
           <h5>
-            Nightleaf helps people book marvelous adventures <br />
-            with natural camping sites around the world.
+            Search any movies to find information <br />
+            about genre, story, rating, published year
           </h5>
         </div>
-        <Button onClick={() => history.push('/search')} variant='outlined'>Explore Nature</Button>
+        <Button onClick={handleOnClick} variant="outlined">
+          Explore Movies
+        </Button>
       </div>
     </div>
   );
 }
 
-export default Banner
+export default Banner;

@@ -26,11 +26,11 @@ function Search() {
   return (
     <div className='search'>
       <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
-      <h2>
+      <h2 style={{color: "white", height: "30px"}}>
         Number of guests
         <PeopleIcon />
       </h2>
-      <input min={0} defaultValue={2} type='number' />
+      <input min={0} defaultValue={2} type='number' style={{color: "white"}}/>
         <Button onClick={() => history.push('./search')}>Search Nightleaf</Button>
     </div>
   );

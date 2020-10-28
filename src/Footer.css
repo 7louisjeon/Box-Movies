@@ -1,9 +1,9 @@
 .footer {
   border-top: 1px solid lightgray;
   padding: 20px;
-  background-color: olive;
+  background-color: var(--clr-main1);
   text-align: center;
-  color: orangered;
+  color: var(--clr-main2);
 }
 
 .footer > p {

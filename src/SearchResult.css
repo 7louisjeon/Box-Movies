@@ -6,6 +6,7 @@
   border-bottom: 1px solid lightgray;
   cursor: pointer;
   line-height: 20px;
+  height: 250px;
 }
 
 .searchResult:hover {
@@ -17,9 +18,11 @@
   width: 350px;
   border-radius: 10px;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .searchResult__info {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,6 +42,7 @@
 .searchResult__infoTop > h3 {
   font-weight: 300;
   margin-top: 10px;
+  font-size: 30px;
 }
 
 .searchResult__infoTop > p {
@@ -47,12 +51,17 @@
   color: gray;
 }
 
+.searchResult__infoTop > .overview {
+  height: 80px;
+  overflow: hidden;
+}
+
 .searchResult__infoBottom {
   display: flex;
   justify-content: space-between;
 }
 
-.searchResult__star{
+.searchResult__star {
   color: red;
 }
 

@@ -3,18 +3,20 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  background-color: orangered;
+  background-color: var(--clr-main1);
   z-index: 100;
   width: 100%;
   top: 0;
   line-height: 20px;
-  color: wheat;
+  color: var(--clr-main2);
 }
 
 .header__icon {
   object-fit: contain;
   height: 100px;
   margin-left: 20px;
+  color: var(--clr-main2);
+  font-size: 40px;
 }
 
 .header__center {
@@ -24,7 +26,7 @@
   max-width: fit-content;
   padding: 10px;
   height: 30px;
-  border: 1px solid wheat;
+  border: 1px solid var(--clr-main2);
   border-radius: 999px;
 }
 
@@ -32,6 +34,10 @@
   border: none;
   /* width: 250px; */
   padding: 10px;
+  outline-width: 0;
+}
+
+.header__center > form > input:focus {
   outline-width: 0;
 }
 

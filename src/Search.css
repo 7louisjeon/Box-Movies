@@ -12,14 +12,14 @@
   justify-content: space-between;
   width: 559px;
   padding: 10px;
-  background-color: orangered;
+  background-color: var(--clr-main1);
   position: absolute;
   left: 0;
   top: 380px;
 }
 
 .search > input {
-  background-color: orangered;
+  background-color: var(--clr-main1);
   width: 539px;
   padding: 20px;
   position: absolute;
@@ -38,12 +38,12 @@
   left: 0;
   top: 480px;
   text-transform: inherit !important;
-  background-color: wheat;
-  color: orangered;
+  background-color: var(--clr-main2);
+  color: var(--clr-main1);
   width: 579px;
 }
 
 .search > button:hover {
-  background-color: olive;
-  color: wheat;
+  background-color: var(--clr-main3);
+  color: var(--clr-main2);
 }
