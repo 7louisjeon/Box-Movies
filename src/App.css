@@ -1,5 +1,5 @@
 .App {
-  --clr-main1: black;
-  --clr-main2: red;
+  --clr-main1: #333;
+  --clr-main2: yellowgreen;
   --clr-main3: white;
 }

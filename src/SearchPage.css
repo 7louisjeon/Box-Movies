@@ -1,6 +1,6 @@
 .searchPage {
-  color: var(--clr-main2);
-  background-color: black;
+  color: var(--clr-main3);
+  background-color: var(--clr-main2);
 }
 
 .searchPage__info {
@@ -14,13 +14,14 @@
 
 .searchPage__info > h1 {
   margin-bottom: 30px;
+  color: var(--clr-main1);
 }
 
 .searchPage__info > button,
 .filter > button,
 .filter {
-  border: 1px solid var(--clr-main2);
-  color: var(--clr-main2);
+  border: 1px solid var(--clr-main1);
+  color: var(--clr-main1);
   border-radius: 30px;
   text-transform: inherit;
   margin: 5px;
@@ -28,4 +29,20 @@
 
 .filter {
   width: fit-content;
+}
+
+.reset {
+  width: 50px;
+  height: 34px;
+  transform: translateY(16%);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.resetAll {
+  width: 70px;
+}
+
+.reset:focus {
+  outline: none;
 }

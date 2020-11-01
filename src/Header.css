@@ -1,9 +1,9 @@
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: sticky;
   background-color: var(--clr-main1);
+  justify-content: space-between;
   z-index: 100;
   width: 100%;
   top: 0;
@@ -14,9 +14,9 @@
 .header__icon {
   object-fit: contain;
   height: 100px;
-  margin-left: 20px;
+  margin-left: 40px;
   color: var(--clr-main2);
-  font-size: 40px;
+  font-size: 45px;
 }
 
 .header__center {
@@ -28,6 +28,7 @@
   height: 30px;
   border: 1px solid var(--clr-main2);
   border-radius: 999px;
+  transform: translateX(-10%);
 }
 
 .header__center > input {

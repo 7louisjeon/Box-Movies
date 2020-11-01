@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./Banner.css";
 
@@ -7,7 +7,6 @@ function Banner({ setPrevSearchTerm }) {
   const history = useHistory();
 
   const handleOnClick = () => {
-    setPrevSearchTerm("Box Office Top Movies");
     history.push("/search");
   };
 
@@ -24,7 +23,7 @@ function Banner({ setPrevSearchTerm }) {
       </div>
       <div className="banner__info">
         <div className="banner__info__texts">
-          <h1>Best Movie Site Ever Existed?</h1>
+          <h1>Best Movie Searching Site Ever Existed.</h1>
           <h5>
             Search any movies to find information <br />
             about genre, story, rating, published year

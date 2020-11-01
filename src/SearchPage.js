@@ -19,6 +19,10 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
   const [originalLanguage, setOriginalLanguage] = useState("Original language");
   const [filterType, setFilterType] = useState();
 
+  useEffect(() => {
+    getFilteredMovies();
+  }, [prevSearchTerm, genre, ageLimit, year, rating, originalLanguage]);
+
   const genreIDs = {
     Action: 28,
     Adventure: 12,
@@ -44,6 +48,7 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
   const adult = { "Not 19+": false, "19+": true };
 
   const years = {
+    "2020s": "202",
     "2010s": "201",
     "2000s": "200",
     "1990s": "199",
@@ -54,19 +59,64 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
 
   const vote = { "★10": 10, "★9.0+": 9, "★8.0+": 8, "★7.0+": 7, "★6.0+": 6 };
 
-  const movieFilter = (input) => {
+  const [filterDesc, setFilterDesc] = useState("");
+
+  const movieFilter = (X) => {
+    let dataCopy = [...X];
+    let filterDescCopy = "";
+    console.log(genre);
     if (genre !== "Genre") {
-      return input.filter((movie) => {
+      dataCopy = dataCopy.filter((movie) => {
         return movie.genre_ids.includes(genreIDs[genre]);
       });
+      filterDescCopy = ` with filter (${genre}`;
     }
     if (ageLimit !== "Age limit") {
-      return input.filter((movie) => {
+      dataCopy = dataCopy.filter((movie) => {
         return movie.adult == adult[ageLimit];
       });
-    } else {
-      return input;
+      if (filterDescCopy == "") {
+        filterDescCopy = ` with filter (${ageLimit}`;
+      } else {
+        filterDescCopy = filterDescCopy + `, ${ageLimit}`;
+      }
     }
+    if (year !== "Year") {
+      dataCopy = dataCopy.filter((movie) => {
+        console.log(movie.release_date.slice(0, 3));
+        return movie.release_date.slice(0, 3) == years[year];
+      });
+      if (filterDescCopy == "") {
+        filterDescCopy = ` with filter (${year}`;
+      } else {
+        filterDescCopy = filterDescCopy + `, ${year}`;
+      }
+    }
+    if (rating !== "Rating") {
+      dataCopy = dataCopy.filter((movie) => {
+        return movie.vote_average > vote[rating];
+      });
+      if (filterDescCopy == "") {
+        filterDescCopy = ` with filter (${rating}`;
+      } else {
+        filterDescCopy = filterDescCopy + `, ${rating}`;
+      }
+    }
+    if (originalLanguage !== "Original language") {
+      dataCopy = dataCopy.filter((movie) => {
+        return movie.original_language == originalLanguage.toLowerCase();
+      });
+      if (filterDescCopy == "") {
+        filterDescCopy = ` with filter (${originalLanguage}`;
+      } else {
+        filterDescCopy = filterDescCopy + `, ${originalLanguage}`;
+      }
+    }
+    if (filterDescCopy !== "") {
+      filterDescCopy = filterDescCopy + ")";
+    }
+    setFilterDesc(filterDescCopy);
+    return dataCopy;
   };
 
   const filterMovies = (API) => {
@@ -85,15 +135,24 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
     }
   };
 
+  const reset = () => {
+    setGenre("Genre");
+    setAgeLimit("Age limit");
+    setYear("Year");
+    setRating("Rating");
+    setOriginalLanguage("Original language");
+  };
+
   return (
     <div className="searchPage">
       <div className="searchPage__info">
         <h1>
-          {prevSearchTerm == "Box Office Top Movies" && "Box Office Top Movies"}
-          {prevSearchTerm !== "Box Office Top Movies" &&
+          {!prevSearchTerm && movies.length > 0 && "Box Office Top Movies"}
+          {prevSearchTerm &&
             movies.length > 0 &&
-            `Showing result for '${prevSearchTerm}'`}
-          {movies.length == 0 && `No search result for '${prevSearchTerm}'`}
+            `Showing result for '${prevSearchTerm}' ${filterDesc}`}
+          {movies.length == 0 &&
+            `No search result for '${prevSearchTerm}' ${filterDesc}`}
         </h1>
         <Filter
           name="genre"
@@ -218,10 +277,14 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Genre"
               choice="Western"
             />
-            <ReplayIcon
-              onClick={() => setGenre("Genre")}
-              style={{ cursor: "pointer" }}
-            />
+            <button className="reset">
+              <ReplayIcon
+                onClick={() => {
+                  setGenre("Genre");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </button>
           </div>
         )}
         <Filter
@@ -245,10 +308,14 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Age limit"
               choice="19+"
             />
-            <ReplayIcon
-              onClick={() => setAgeLimit("Age limit")}
-              style={{ cursor: "pointer" }}
-            />
+            <button className="reset">
+              <ReplayIcon
+                onClick={() => {
+                  setAgeLimit("Age limit");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </button>
           </div>
         )}
         <Filter
@@ -260,6 +327,12 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
         />
         {filterType == "year" && (
           <div className="filter">
+            <Choice
+              setFilter={setYear}
+              filterType={year}
+              filterTypeString="Year"
+              choice="2020s"
+            />
             <Choice
               setFilter={setYear}
               filterType={year}
@@ -296,10 +369,14 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Year"
               choice="1960s"
             />
-            <ReplayIcon
-              onClick={() => setYear("Year")}
-              style={{ cursor: "pointer" }}
-            />
+            <button className="reset">
+              <ReplayIcon
+                onClick={() => {
+                  setYear("Year");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </button>
           </div>
         )}
         <Filter
@@ -341,10 +418,15 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Rating"
               choice="★6.0+"
             />
-            <ReplayIcon
-              onClick={() => setRating("Rating")}
-              style={{ cursor: "pointer" }}
-            />
+            <button className="reset">
+              <ReplayIcon
+                onClick={() => {
+                  setRating("Rating");
+                  getFilteredMovies();
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </button>
           </div>
         )}
         <Filter
@@ -380,17 +462,23 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Original language"
               choice="PR"
             />
-            <ReplayIcon
-              onClick={() => setOriginalLanguage("Original language")}
-              style={{ cursor: "pointer" }}
-            />
+            <button className="reset">
+              <ReplayIcon
+                onClick={() => {
+                  setOriginalLanguage("Original language");
+                }}
+                style={{ cursor: "pointer" }}
+              />
+            </button>
           </div>
         )}
+        <button className="reset resetAll" onClick={reset}>
+          <ReplayIcon />
+        </button>
       </div>
       {movies &&
         movies.map((movie) => <SearchResult key={movie.id} {...movie} />)}
     </div>
   );
 }
-
 export default SearchPage;
