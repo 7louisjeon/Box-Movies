@@ -277,13 +277,13 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Genre"
               choice="Western"
             />
-            <button className="reset">
-              <ReplayIcon
-                onClick={() => {
-                  setGenre("Genre");
-                }}
-                style={{ cursor: "pointer" }}
-              />
+            <button
+              className="reset"
+              onClick={() => {
+                setGenre("Genre");
+              }}
+            >
+              <ReplayIcon style={{ cursor: "pointer" }} />
             </button>
           </div>
         )}
@@ -308,13 +308,13 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Age limit"
               choice="19+"
             />
-            <button className="reset">
-              <ReplayIcon
-                onClick={() => {
-                  setAgeLimit("Age limit");
-                }}
-                style={{ cursor: "pointer" }}
-              />
+            <button
+              className="reset"
+              onClick={() => {
+                setAgeLimit("Age limit");
+              }}
+            >
+              <ReplayIcon style={{ cursor: "pointer" }} />
             </button>
           </div>
         )}
@@ -369,13 +369,14 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Year"
               choice="1960s"
             />
-            <button className="reset">
-              <ReplayIcon
-                onClick={() => {
-                  setYear("Year");
-                }}
-                style={{ cursor: "pointer" }}
-              />
+            <button
+              className="reset"
+              onClick={() => {
+                setYear("Year");
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <ReplayIcon />
             </button>
           </div>
         )}
@@ -418,14 +419,14 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Rating"
               choice="★6.0+"
             />
-            <button className="reset">
-              <ReplayIcon
-                onClick={() => {
-                  setRating("Rating");
-                  getFilteredMovies();
-                }}
-                style={{ cursor: "pointer" }}
-              />
+            <button
+              className="reset"
+              onClick={() => {
+                setRating("Rating");
+                getFilteredMovies();
+              }}
+            >
+              <ReplayIcon style={{ cursor: "pointer" }} />
             </button>
           </div>
         )}
@@ -462,13 +463,13 @@ function SearchPage({ movies, prevSearchTerm, setMovies }) {
               filterTypeString="Original language"
               choice="PR"
             />
-            <button className="reset">
-              <ReplayIcon
-                onClick={() => {
-                  setOriginalLanguage("Original language");
-                }}
-                style={{ cursor: "pointer" }}
-              />
+            <button
+              className="reset"
+              onClick={() => {
+                setOriginalLanguage("Original language");
+              }}
+            >
+              <ReplayIcon style={{ cursor: "pointer" }} />
             </button>
           </div>
         )}
